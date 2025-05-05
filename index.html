@@ -358,7 +358,7 @@
 								
 
 									<!-- Item 3 -->
-									<figure class="gallery-grid__item machine-learning">
+									<figure class="gallery-grid__item web-development">
 										<div class="gallery-grid__image-wrap">
 											<img class="gallery-grid__image cover lazyload"
 												src="assets/icons/Interview.png" data-zoom alt="" />
@@ -380,7 +380,7 @@
 									</figcaption>
 								</figure>
 																	<!-- Item 4 -->
-								<figure class="gallery-grid__item data-science">
+								<figure class="gallery-grid__item blockchain">
 									<div class="gallery-grid__image-wrap">
 										<img class="gallery-grid__image cover lazyload"
 											src="assets/icons/JobA2.png" data-zoom alt="" />
@@ -391,7 +391,7 @@
 									</figcaption>
 								</figure>
 
-								<figure class="gallery-grid__item data-science">
+								<figure class="gallery-grid__item machine-learning">
 									<div class="gallery-grid__image-wrap">
 										<img class="gallery-grid__image cover lazyload"
 											src="assets/icons/ResumeA.png" data-zoom alt="" />
@@ -432,48 +432,46 @@
 								</div>
 								<h2 class="title title--h3">Contact Form</h2>
 
-								<form id="contact-form" class="contact-form" data-toggle="validator">
+								<form id="contact-form" class="contact-form">
 									<div class="row">
 										<div class="form-group col-12 col-md-6">
 											<input type="text" class="form-control" id="nameContact" name="nameContact"
-												placeholder="Full name" required="required" autocomplete="on"
-												oninvalid="setCustomValidity('Fill in the field')"
-												onkeyup="setCustomValidity('')">
+												   placeholder="Full name" required autocomplete="on">
 											<div class="help-block with-errors"></div>
 										</div>
 										<div class="form-group col-12 col-md-6">
-											<input type="email" class="form-control" id="emailContact"
-												name="emailContact" placeholder="Email address" required="required"
-												autocomplete="on" oninvalid="setCustomValidity('Email is incorrect')"
-												onkeyup="setCustomValidity('')">
+											<input type="email" class="form-control" id="emailContact" name="emailContact"
+												   placeholder="Email address" required autocomplete="on">
 											<div class="help-block with-errors"></div>
 										</div>
 										<div class="form-group col-12 col-md-12">
-											<textarea class="textarea form-control" id="messageContact"
-												name="messageContact" placeholder="Your Message" rows="4"
-												required="required" oninvalid="setCustomValidity('Fill in the field')"
-												onkeyup="setCustomValidity('')"></textarea>
+                <textarea class="textarea form-control" id="messageContact" name="messageContact"
+						  placeholder="Your Message" rows="4" required></textarea>
 											<div class="help-block with-errors"></div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-12 col-md-6 order-2 order-md-1 text-center text-md-left">
-											<div id="validator-contact" class="hidden"></div>
+											<div id="validator-contact"></div>
 										</div>
 										<div class="col-12 col-md-6 order-1 order-md-2 text-right">
-											<button type="submit" class="btn"><i class="font-icon icon-send"></i> Send
-												Message</button>
+											<button type="submit" class="btn"><i class="font-icon icon-send"></i> Send Message</button>
 										</div>
 									</div>
 								</form>
 							</div>
-						</div>
-					</div>
+
+							<!-- Add EmailJS SDK -->
+							<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 					<!-- Footer -->
 					<footer class="footer">© 2025 Ayush Pandey</footer>
 				</div>
+
 			</div>
+				
 		</div>
+
+
 	</main>
 
 	<!-- BackToTop -->
