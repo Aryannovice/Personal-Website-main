@@ -731,6 +731,7 @@ button:focus {
     display: none;
   }
 }
+
 .header > * {
   min-width: 0;
 }
