@@ -688,56 +688,64 @@ $(document).ready(function() {
       Contacts form
     -------------------------------------------------------------------*/
 
-    $("#contact-form").validator().on("submit", function (event) {
-        if (event.isDefaultPrevented()) {
-            formError();
-            submitMSG(false, "Please fill in the form...");
-        } else {
-            event.preventDefault();
-            submitForm();
+    $(document).ready(function () {
+        // Initialize EmailJS with your User ID
+        emailjs.init("FmXyjApLYF5olUDv8"); // Replace with your EmailJS User ID
+
+        $("#contact-form").on("submit", function (event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Get form values
+            var name = $("#nameContact").val().trim();
+            var email = $("#emailContact").val().trim();
+            var message = $("#messageContact").val().trim();
+
+            // Basic validation
+            if (!name || !email || !message) {
+                submitMSG(false, "Please fill in all fields.");
+                formError();
+                return;
+            }
+
+            // Validate email format
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                submitMSG(false, "Please enter a valid email address.");
+                formError();
+                return;
+            }
+
+            // Send email using EmailJS
+            emailjs.send("service_cl8ej78", "template_5uxi065", {
+                name: name,
+                email: email,
+                message: message
+            }).then(function (response) {
+                formSuccess();
+            }, function (error) {
+                formError();
+                submitMSG(false, "Failed to send message. Please try again later.");
+                console.error("EmailJS error:", error);
+            });
+        });
+
+        function formSuccess() {
+            $("#contact-form")[0].reset();
+            submitMSG(true, "Thanks! Your message has been sent.");
+        }
+
+        function formError() {
+            $("#contact-form")
+                .removeClass()
+                .addClass("shake animated")
+                .one("webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend", function () {
+                    $(this).removeClass();
+                });
+        }
+
+        function submitMSG(valid, msg) {
+            var msgClasses = valid ? "validation-success" : "validation-danger";
+            $("#validator-contact").removeClass().addClass(msgClasses).text(msg);
         }
     });
-
-    function submitForm(){
-        var name = $("#nameContact").val(),
-            email = $("#emailContact").val(),
-            message = $("#messageContact").val();
-			
-        var url = "https://aapbd.com/api/contact-with-nayeem";
-		
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: "name=" + name + "&email=" + email + "&message=" + message,
-            success : function(data){
-                if (data.status == "success"){
-                    formSuccess();
-                } else {
-                    formError();
-                    submitMSG(false,data.message);
-                }
-            }
-        });
-    }
-
-    function formSuccess(){
-        $("#contact-form")[0].reset();
-        submitMSG(true, "Thanks! Your message has been sent.");
-    }
-  
-    function formError(){
-        $("#contactForm").removeClass().addClass('shake animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
-            $(this).removeClass();
-        });
-    }  
-  
-    function submitMSG(valid, msg){
-		var msgClasses;
-        if(valid){
-            msgClasses = "validation-success";
-        } else {
-           msgClasses = "validation-danger";
-        }
-        $("#validator-contact").removeClass().addClass(msgClasses).text(msg);
-    }
 });
